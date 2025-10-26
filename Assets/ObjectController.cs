@@ -12,6 +12,8 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private bool _isRewinding;
 
     [SerializeField] private bool _isPausing;
+
+    [SerializeField] private bool _controlMode;
     
     void Start()
     {
@@ -21,6 +23,9 @@ public class ObjectController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!this._controlMode)
+            return;
+
         Vector3 camForward = CameraTransform.forward;
         camForward.Normalize();
 
@@ -60,7 +65,7 @@ public class ObjectController : MonoBehaviour
 
     public void OnRewind(InputAction.CallbackContext context)
     {
-        if (context.performed && this._selectedRewindObject != null)
+        if (context.performed && this._selectedRewindObject != null && this._controlMode)
         {
             if (this._isRewinding)
             {
@@ -74,10 +79,10 @@ public class ObjectController : MonoBehaviour
             }
         }
     }
-    
+
     public void OnPasue(InputAction.CallbackContext context)
     {
-        if(context.performed && this._selectedRewindObject != null)
+        if (context.performed && this._selectedRewindObject != null && this._controlMode)
         {
             if (this._isPausing)
             {
@@ -90,5 +95,11 @@ public class ObjectController : MonoBehaviour
                 this._selectedRewindObject.SetPause(true);
             }
         }
+    }
+    
+    public void OnChange(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            this._controlMode = !this._controlMode;
     }
 }

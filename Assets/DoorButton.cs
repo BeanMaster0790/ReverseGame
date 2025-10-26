@@ -19,6 +19,8 @@ public class DoorButton : MonoBehaviour
 
     private float _currentTime = 0;
 
+    private int _objectsOnButton;
+
 
 
     void Start()
@@ -53,7 +55,9 @@ public class DoorButton : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
 
-        if(!this._isPressed)
+        this._objectsOnButton += 1;
+
+        if(!this._isPressed && this._objectsOnButton == 1)
         {
             this._isPressed = true;
 
@@ -67,7 +71,9 @@ public class DoorButton : MonoBehaviour
     void OnTriggerExit(Collider collision)
     {
 
-        if(this._isPressed)
+        this._objectsOnButton -= 1;
+
+        if (this._isPressed && this._objectsOnButton == 0)
         {
             this._isPressed = false;
 
