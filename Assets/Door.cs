@@ -27,6 +27,9 @@ public class Door : MonoBehaviour
         {
             button.ButtonDoor = this;
         }
+
+        BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
+        boxDrawer._lineColour = Color.green;
     }
 
     void Update()

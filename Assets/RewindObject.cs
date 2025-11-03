@@ -32,6 +32,9 @@ public class RewindObject : MonoBehaviour
         float fixedTimeInterval = Time.fixedDeltaTime;
 
         this._maxIndex = (int)math.ceil(this._recordTimeSeconds / fixedTimeInterval);
+
+        BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
+        boxDrawer._lineColour = Color.blue;
     }
 
     // Update is called once per frame

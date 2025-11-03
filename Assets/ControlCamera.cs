@@ -27,8 +27,6 @@ public class ControlCamera : MonoBehaviour
 
         this._xRotation = Mathf.Clamp(this._xRotation, -45 * Mathf.Deg2Rad, 45 * Mathf.Deg2Rad);
 
-        Debug.Log(this._xRotation);
-
         this.transform.rotation = quaternion.Euler(-this._xRotation, this._yRotation, 0);
     }
     

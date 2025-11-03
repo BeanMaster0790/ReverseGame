@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,10 +15,12 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private bool _isPausing;
 
     [SerializeField] private bool _controlMode;
+
+    public static EventHandler<ControlModeEvent> S_ControlModeToggle;
     
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -52,9 +55,6 @@ public class ObjectController : MonoBehaviour
 
         if (Physics.Raycast(CameraTransform.position, camForward, out hit, maxDistance, objectLayer))
         {
-            // hit now contains the hit info
-            Debug.Log($"Hit {hit.collider.name} at {hit.point}");
-
             this._selectedRewindObject = hit.collider.GetComponent<RewindObject>();
         }
         else
@@ -96,10 +96,19 @@ public class ObjectController : MonoBehaviour
             }
         }
     }
+
+    public void ToggleChanges()
+    {
+        this._controlMode = !this._controlMode;
+
+        S_ControlModeToggle?.Invoke(this, new ControlModeEvent(this._controlMode));
+    }
     
     public void OnChange(InputAction.CallbackContext context)
     {
         if (context.performed)
-            this._controlMode = !this._controlMode;
+        {
+            GameObject.FindGameObjectWithTag("CameraTransition").GetComponent<Animator>().Play("CameraTransitionAnimation");
+        }
     }
 }

@@ -30,6 +30,9 @@ public class DoorButton : MonoBehaviour
         this._endPosition = this.transform.position;
 
         this._endPosition.y -= this._lowerBy;
+
+        BoundingBoxDrawer boxDrawer = this.transform.parent.gameObject.AddComponent<BoundingBoxDrawer>();
+        boxDrawer._lineColour = Color.yellow;
     }
 
     void Update()

@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
 
         this._playerCurrentSpeed = this._movePlayerSpeed;
+
+        ObjectController.S_ControlModeToggle += OnChange;
     }
 
     void FixedUpdate()
@@ -97,25 +99,22 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     
-    public void OnChange(InputAction.CallbackContext context)
+    public void OnChange(object sender, ControlModeEvent e)
     {
-        if (context.performed)
+        this._controlMode = !this._controlMode;
+
+        this._playerCurrentSpeed = (this._controlMode) ? this._controlPlayerSpeed : this._movePlayerSpeed;
+
+        if (this._controlMode)
         {
-            this._controlMode = !this._controlMode;
-
-            this._playerCurrentSpeed = (this._controlMode) ? this._controlPlayerSpeed : this._movePlayerSpeed;
-
-            if (this._controlMode)
-            {
-                this.MoveCameraTransform.gameObject.SetActive(false);
-                this.ControlCameraTransform.gameObject.SetActive(true);
-            }
-            else
-            {
-                this.MoveCameraTransform.gameObject.SetActive(true);
-                this.ControlCameraTransform.gameObject.SetActive(false);
-            }
-
+            this.MoveCameraTransform.gameObject.SetActive(false);
+            this.ControlCameraTransform.gameObject.SetActive(true);
         }
+        else
+        {
+            this.MoveCameraTransform.gameObject.SetActive(true);
+            this.ControlCameraTransform.gameObject.SetActive(false);
+        }
+
     }
 }
