@@ -8,6 +8,8 @@ TagManager:
   - Button
   - Door
   - CameraTransition
+  - EnemyPathNode
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +19,8 @@ TagManager:
   - UI
   - controlableObject
   - lineRenderers
-  - 
-  - 
+  - controllableObjectCollider
+  - button
   - 
   - 
   - 

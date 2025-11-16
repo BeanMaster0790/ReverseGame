@@ -17,6 +17,8 @@ public class ObjectController : MonoBehaviour
     [SerializeField] private bool _controlMode;
 
     public static EventHandler<ControlModeEvent> S_ControlModeToggle;
+    public static EventHandler<ObjectSelectEvent> S_ObjectSelect;
+
     
     void Start()
     {
@@ -56,10 +58,13 @@ public class ObjectController : MonoBehaviour
         if (Physics.Raycast(CameraTransform.position, camForward, out hit, maxDistance, objectLayer))
         {
             this._selectedRewindObject = hit.collider.GetComponent<RewindObject>();
+
+            S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(this._selectedRewindObject));
         }
         else
         {
             this._selectedRewindObject = null;
+            S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(null));
         }
     }
 

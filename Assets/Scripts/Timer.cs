@@ -4,9 +4,11 @@ public class Timer
 {
     private float _duration;
 
-    private float _timePassed;
+    public float TimePassed;
 
-    public bool IsFinished;
+    public float TimeRemaing;
+
+    public bool IsFinished = true;
 
     public bool IsActive;
 
@@ -16,7 +18,7 @@ public class Timer
 
         this._duration = duration;
 
-        this._timePassed = 0;
+        this.TimePassed = 0;
 
         this.IsActive = true;
     }
@@ -37,12 +39,14 @@ public class Timer
     {
         if (this.IsActive)
         {
-            this._timePassed += Time.deltaTime;
+            this.TimePassed += Time.deltaTime;
 
-            if (this._timePassed >= this._duration)
+            if (this.TimePassed >= this._duration)
             {
                 FinishTimer();
             }
         }
+
+        this.TimeRemaing = this._duration - this.TimePassed;
     }
 }
