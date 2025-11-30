@@ -2,9 +2,9 @@ using System;
 
 public class ObjectSelectEvent : EventArgs
 {
-    public RewindObject RewindObject;
+    public SelectionObject RewindObject;
 
-    public ObjectSelectEvent(RewindObject rewindObject)
+    public ObjectSelectEvent(SelectionObject rewindObject)
     {
         this.RewindObject = rewindObject;
     }

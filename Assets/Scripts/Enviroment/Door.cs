@@ -21,6 +21,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         this._startPosition = this.transform.position;
+        this._buttonChangePoint = this._startPosition;
         this._openPosition = this._openPositionTransform.position;
 
         foreach (DoorButton button in this._doorButtons)

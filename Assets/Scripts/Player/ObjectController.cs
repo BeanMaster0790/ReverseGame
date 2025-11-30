@@ -8,7 +8,7 @@ public class ObjectController : MonoBehaviour
 
     public LayerMask objectLayer;
 
-    [SerializeField] private RewindObject _selectedRewindObject = null;
+    [SerializeField] private SelectionObject _selectedRewindObject = null;
 
     [SerializeField] private bool _isRewinding;
 
@@ -57,7 +57,7 @@ public class ObjectController : MonoBehaviour
 
         if (Physics.Raycast(CameraTransform.position, camForward, out hit, maxDistance, objectLayer))
         {
-            this._selectedRewindObject = hit.collider.GetComponent<RewindObject>();
+            this._selectedRewindObject = hit.collider.GetComponent<SelectionObject>();
 
             S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(this._selectedRewindObject));
         }

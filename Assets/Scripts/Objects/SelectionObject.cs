@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
 
-public class RewindObject : MonoBehaviour
+public class SelectionObject : MonoBehaviour
 {
 
     [Header("Pannel Settings")]
@@ -13,6 +13,8 @@ public class RewindObject : MonoBehaviour
 
     public string PasueTime = "I will change on my own";
     public string RewindTime = "I will change on my own";
+
+    [SerializeField] private Color _outlineColour = Color.blue;
 
     private List<Vector3> _recordedPositions = new List<Vector3>();
     private List<quaternion> _recordedRotations = new List<quaternion>();
@@ -31,8 +33,9 @@ public class RewindObject : MonoBehaviour
     private Timer _pauseTimer;
     private Timer _pauseCooldownTimer;
 
-
     private Rigidbody _objectRb;
+
+    private bool _hasRb;
 
     private int _maxIndex;
 
@@ -45,17 +48,23 @@ public class RewindObject : MonoBehaviour
 
         this._objectRb = gameObject.GetComponent<Rigidbody>();
 
+        if (this._objectRb == null)
+            this._hasRb = false;
+
         float fixedTimeInterval = Time.fixedDeltaTime;
 
         this._maxIndex = (int)math.ceil(this._recordTimeSeconds / fixedTimeInterval);
 
         BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
-        boxDrawer._lineColour = Color.blue;
+        boxDrawer._lineColour = this._outlineColour;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (!this._hasRb)
+            return;
+
         int lastIndex = this._recordedPositions.Count - 1;
 
         if(IsPasued)
@@ -114,6 +123,14 @@ public class RewindObject : MonoBehaviour
 
     void Update()
     {
+
+        if(!this._hasRb)
+        {
+            this.RewindTime = "N/A";
+            this.PasueTime = "N/A";
+            return;
+        }
+
         this._pauseTimer.Update();
         this._pauseCooldownTimer.Update();
 
@@ -148,6 +165,9 @@ public class RewindObject : MonoBehaviour
 
     public void SetRewind(bool state)
     {
+        if (!this._hasRb)
+            return;
+
         this.IsRewinding = state;
 
         if (state)
@@ -156,6 +176,9 @@ public class RewindObject : MonoBehaviour
 
     public void SetPause(bool state)
     {
+
+        if (!this._hasRb)
+            return;
 
         if (state)
         {

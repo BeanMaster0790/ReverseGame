@@ -22,9 +22,6 @@ public class EnemyPathFollower : MonoBehaviour
         this._waitTimer = new Timer();
 
         Debug.Log(this._node.Position);
-
-        BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
-        boxDrawer._lineColour = Color.red;
     }
 
     void Update()

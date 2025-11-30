@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class InfoPannelManager : MonoBehaviour
 {
-    private RewindObject _rewindObject;
+    private SelectionObject _rewindObject;
 
     [SerializeField] private TMP_Text _name;
     [SerializeField] private TMP_Text _desc;
