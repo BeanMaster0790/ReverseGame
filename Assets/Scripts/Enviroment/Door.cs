@@ -15,7 +15,13 @@ public class Door : MonoBehaviour
 
     [SerializeField] private float _timeToOpen;
 
+    public bool LockOpen;
+
     private float _currentTime;
+
+    public bool DoorOpen;
+
+    [SerializeField] private bool _playSound = true;
 
 
     void Start()
@@ -28,9 +34,6 @@ public class Door : MonoBehaviour
         {
             button.ButtonDoor = this;
         }
-
-        BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
-        boxDrawer._lineColour = Color.green;
     }
 
     void Update()
@@ -42,14 +45,26 @@ public class Door : MonoBehaviour
             this.transform.position = Vector3.Lerp(this._buttonChangePoint, this._openPosition, t);
 
             this._currentTime += Time.deltaTime;
+
+            if(!this.DoorOpen)
+            {
+                if(this._playSound)
+                    PlayerSoundsManager.Current.PlaySound("Pass");
+
+                this.DoorOpen = true;
+            }
+
+                
         }
-        else
+        else if(!this.LockOpen)
         {
             float t = this._currentTime / this._timeToOpen;
 
             this.transform.position = Vector3.Lerp(this._buttonChangePoint, this._startPosition, t);
 
             this._currentTime += Time.deltaTime;
+
+            this.DoorOpen = false;
         }
     }
 
@@ -58,6 +73,7 @@ public class Door : MonoBehaviour
         if (state == ButtonState.Pressed)
         {
             this._buttonsPressed += 1;
+            Debug.Log("Button Pressed");
 
             this._buttonChangePoint = this.transform.position;
 
@@ -67,9 +83,6 @@ public class Door : MonoBehaviour
             float percentDifference = currentDistanceBetween / maxDistanceBetween;
 
             this._currentTime = this._timeToOpen - (this._timeToOpen * percentDifference)  - Time.deltaTime;
-
-            Debug.Log($"{maxDistanceBetween} {currentDistanceBetween} {percentDifference} {_currentTime}");
-
         }
 
         else if (state == ButtonState.Relaesed)
@@ -85,8 +98,7 @@ public class Door : MonoBehaviour
 
             this._currentTime = this._timeToOpen - (this._timeToOpen * percentDifference) - Time.deltaTime;
 
-            Debug.Log($"{maxDistanceBetween} {currentDistanceBetween} {percentDifference} {_currentTime}");
-
+            Debug.Log("Button Released");
         }
     }
 }

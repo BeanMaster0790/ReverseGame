@@ -9,8 +9,7 @@ public class DoorButton : MonoBehaviour
     [SerializeField] private float _timeToLower;
 
 
-    [HideInInspector] public Door ButtonDoor;
-
+    public Door ButtonDoor;
 
     private bool _isPressed;
 
@@ -30,9 +29,6 @@ public class DoorButton : MonoBehaviour
         this._endPosition = this.transform.position;
 
         this._endPosition.y -= this._lowerBy;
-
-        BoundingBoxDrawer boxDrawer = this.transform.parent.gameObject.AddComponent<BoundingBoxDrawer>();
-        boxDrawer._lineColour = Color.yellow;
     }
 
     void Update()
@@ -67,12 +63,16 @@ public class DoorButton : MonoBehaviour
             this._currentTime = 0;
 
             this.ButtonDoor.ButtonStateChange(ButtonState.Pressed);
+
+            PlayerSoundsManager.Current.PlaySound("Interact");
         }
 
     }
 
     void OnTriggerExit(Collider collision)
     {
+        if(this.ButtonDoor.DoorOpen && this.ButtonDoor.LockOpen)
+            return;
 
         this._objectsOnButton -= 1;
 

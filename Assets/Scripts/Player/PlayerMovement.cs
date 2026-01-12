@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _controlPlayerSpeed = 0.2f;
     [SerializeField] private float _controlJumpHeight = 1.5f;
 
-
     private float _playerCurrentSpeed = 0.2f;
     private bool _jumpPressed;
 
@@ -81,6 +80,9 @@ public class PlayerMovement : MonoBehaviour
             playerVelocity.y += this._gravity * Time.fixedDeltaTime;
 
         CharacterController.Move(playerVelocity);
+
+        if(playerMoveVector != Vector2.zero)
+            this.transform.rotation = Quaternion.LookRotation(camForward, Vector3.up);
     }
 
     public void OnMove(InputAction.CallbackContext context)

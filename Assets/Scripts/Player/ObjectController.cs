@@ -1,4 +1,5 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,22 +15,18 @@ public class ObjectController : MonoBehaviour
 
     [SerializeField] private bool _isPausing;
 
-    [SerializeField] private bool _controlMode;
+    public bool InControlMode;
 
     public static EventHandler<ControlModeEvent> S_ControlModeToggle;
     public static EventHandler<ObjectSelectEvent> S_ObjectSelect;
 
-    
-    void Start()
-    {
-
-    }
-
     // Update is called once per frame
     void Update()
     {
-        if (!this._controlMode)
+        if (!this.InControlMode)
+        {
             return;
+        }
 
         Vector3 camForward = CameraTransform.forward;
         camForward.Normalize();
@@ -38,18 +35,22 @@ public class ObjectController : MonoBehaviour
         camRight.y = 0;
         camRight.Normalize();
 
-        if (this._isRewinding)
+        if (this._isRewinding && this._selectedRewindObject != null)
         {
             this._isRewinding = this._selectedRewindObject.IsRewinding;
 
             return;
         }
-        
-        if(this._isPausing)
+        else if(this._isPausing && this._selectedRewindObject != null)
         {
             this._isPausing = this._selectedRewindObject.IsPasued;
 
             return;
+        }
+        else if(this._selectedRewindObject == null)
+        {
+            this._isPausing = false;
+            this._isRewinding = false;
         }
 
         RaycastHit hit;
@@ -59,18 +60,22 @@ public class ObjectController : MonoBehaviour
         {
             this._selectedRewindObject = hit.collider.GetComponent<SelectionObject>();
 
-            S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(this._selectedRewindObject));
-        }
-        else
-        {
-            this._selectedRewindObject = null;
-            S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(null));
+            if(this._selectedRewindObject == null)
+            {
+                this._selectedRewindObject = null;
+                S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(null));     
+            }
+            else
+            {
+                S_ObjectSelect?.Invoke(this, new ObjectSelectEvent(this._selectedRewindObject));
+            }
+
         }
     }
 
     public void OnRewind(InputAction.CallbackContext context)
     {
-        if (context.performed && this._selectedRewindObject != null && this._controlMode)
+        if (context.performed && this._selectedRewindObject != null && this.InControlMode)
         {
             if (this._isRewinding)
             {
@@ -87,7 +92,7 @@ public class ObjectController : MonoBehaviour
 
     public void OnPasue(InputAction.CallbackContext context)
     {
-        if (context.performed && this._selectedRewindObject != null && this._controlMode)
+        if (context.performed && this._selectedRewindObject != null && this.InControlMode)
         {
             if (this._isPausing)
             {
@@ -104,9 +109,9 @@ public class ObjectController : MonoBehaviour
 
     public void ToggleChanges()
     {
-        this._controlMode = !this._controlMode;
+        this.InControlMode = !this.InControlMode;
 
-        S_ControlModeToggle?.Invoke(this, new ControlModeEvent(this._controlMode));
+        S_ControlModeToggle?.Invoke(this, new ControlModeEvent(this.InControlMode));
     }
     
     public void OnChange(InputAction.CallbackContext context)
@@ -114,6 +119,7 @@ public class ObjectController : MonoBehaviour
         if (context.performed)
         {
             GameObject.FindGameObjectWithTag("CameraTransition").GetComponent<Animator>().Play("CameraTransitionAnimation");
+            PlayerSoundsManager.Current.PlaySound("Tab");
         }
     }
 }

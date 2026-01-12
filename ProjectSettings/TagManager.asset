@@ -10,6 +10,10 @@ TagManager:
   - CameraTransition
   - EnemyPathNode
   - Enemy
+  - HintsManager
+  - DetectionEffect
+  - PlayerSounds
+  - FollowCamera
   layers:
   - Default
   - TransparentFX
@@ -21,8 +25,8 @@ TagManager:
   - lineRenderers
   - controllableObjectCollider
   - button
-  - 
-  - 
+  - Player
+  - Checkpoint
   - 
   - 
   - 

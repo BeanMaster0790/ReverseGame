@@ -13,9 +13,17 @@ public class DamageOnContact : MonoBehaviour
         this._cooldownTimer.StartTimer(this._damageHitCooldown);
     }
 
-    void OnCollisionStay(Collision collision)
+    void OnTriggerEnter(Collider collision)
     {
-        if (collision.collider.tag == "Player")
+        if (collision.tag == "Player")
+        {
+            DamageCollider(collision);
+        }
+    }
+
+    void OnTriggerStay(Collider collision)
+    {
+        if (collision.tag == "Player")
         {
             DamageCollider(collision);
         }
@@ -26,12 +34,12 @@ public class DamageOnContact : MonoBehaviour
         this._cooldownTimer.Update();
     }
 
-    private void DamageCollider(Collision collision)
+    private void DamageCollider(Collider collision)
     {
         if (!this._cooldownTimer.IsFinished)
             return;
 
-        PlayerHealth health = collision.collider.gameObject.GetComponent<PlayerHealth>();
+        PlayerHealth health = collision.gameObject.GetComponent<PlayerHealth>();
 
         if (health == null)
         {

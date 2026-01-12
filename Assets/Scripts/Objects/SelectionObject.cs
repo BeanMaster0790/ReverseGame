@@ -1,10 +1,37 @@
 using System;
 using System.Collections.Generic;
 using Unity.Mathematics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SelectionObject : MonoBehaviour
 {
+    public Vector3? FirstRecordedPosition 
+    {
+        get
+        {
+            if(this._recordedPositions.Count > 0)
+            {
+                return this._recordedPositions[0];
+            }
+
+            return null;
+        }
+    }
+
+    public quaternion? FirstRecordedRotation 
+    {
+        get
+        {
+            if(this._recordedRotations.Count > 0)
+            {
+                return this._recordedRotations[0];
+            }
+
+            return null;
+        }
+    }
 
     [Header("Pannel Settings")]
 
@@ -20,11 +47,11 @@ public class SelectionObject : MonoBehaviour
     private List<quaternion> _recordedRotations = new List<quaternion>();
 
     [Header("Object Settings")]
-    [SerializeField] private float _recordTimeSeconds = 10;
+    public float RecordTimeSeconds = 10;
 
-    [SerializeField] private float _pauseTimeSeconds = 5;
+    public float PauseTimeSeconds = 5;
 
-    [SerializeField] private float _pauseCooldown = 5;
+    public float PauseCooldown = 5;
 
     public bool IsRewinding;
 
@@ -48,12 +75,12 @@ public class SelectionObject : MonoBehaviour
 
         this._objectRb = gameObject.GetComponent<Rigidbody>();
 
-        if (this._objectRb == null)
-            this._hasRb = false;
+        if (this._objectRb != null)
+            this._hasRb = true;
 
         float fixedTimeInterval = Time.fixedDeltaTime;
 
-        this._maxIndex = (int)math.ceil(this._recordTimeSeconds / fixedTimeInterval);
+        this._maxIndex = (int)math.ceil(this.RecordTimeSeconds / fixedTimeInterval);
 
         BoundingBoxDrawer boxDrawer = this.gameObject.AddComponent<BoundingBoxDrawer>();
         boxDrawer._lineColour = this._outlineColour;
@@ -140,12 +167,12 @@ public class SelectionObject : MonoBehaviour
         }
         else
         {
-            this.PasueTime = this._pauseTimeSeconds.ToString("0") + "s";
+            this.PasueTime = this.PauseTimeSeconds.ToString("0") + "s";
         }
 
         if(_pauseCooldownTimer.IsActive)
         {
-            float dotValue = this._pauseCooldown / 4;
+            float dotValue = this.PauseCooldown / 4;
 
             int numberOfDots = (int)Mathf.Floor(this._pauseCooldownTimer.TimePassed / dotValue);
 
@@ -157,18 +184,27 @@ public class SelectionObject : MonoBehaviour
             }
         }
 
-
-        float indexTime = this._maxIndex / this._recordTimeSeconds;
-
         this.RewindTime = ((float)this._recordedPositions.Count * Time.fixedDeltaTime).ToString("0") + "s";
+
+        if(this.RecordTimeSeconds == 0)
+        {
+            this.RewindTime = "N/A";
+        }
+
+        if(this.PauseTimeSeconds == 0)
+        {
+            this.PasueTime = "N/A";
+        }
     }
 
     public void SetRewind(bool state)
     {
-        if (!this._hasRb)
+        if (!this._hasRb || this.RecordTimeSeconds == 0)
             return;
 
         this.IsRewinding = state;
+
+        PlayerSoundsManager.Current.PlaySound("Rewind");
 
         if (state)
             this.IsPasued = false;
@@ -177,14 +213,14 @@ public class SelectionObject : MonoBehaviour
     public void SetPause(bool state)
     {
 
-        if (!this._hasRb)
+        if (!this._hasRb || this.PauseTimeSeconds == 0)
             return;
 
         if (state)
         {
             if (!_pauseCooldownTimer.IsActive)
             {
-                this._pauseTimer.StartTimer(this._pauseTimeSeconds);
+                this._pauseTimer.StartTimer(this.PauseTimeSeconds);
 
                 this._objectRb.isKinematic = true;
 
@@ -198,7 +234,7 @@ public class SelectionObject : MonoBehaviour
             this._objectRb.isKinematic = false;
             this._pauseTimer.FinishTimer();
 
-            this._pauseCooldownTimer.StartTimer(this._pauseCooldown);
+            this._pauseCooldownTimer.StartTimer(this.PauseCooldown);
 
             IsPasued = state;
         }
