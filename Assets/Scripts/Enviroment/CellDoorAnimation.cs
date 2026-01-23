@@ -8,6 +8,8 @@ public class CellDoorAnimation : MonoBehaviour
 
     [SerializeField] private Vector3 _launchVector;
 
+    [SerializeField] private GameObject _door;
+
     private Animator _animator;
 
     private GameObject _player;
@@ -65,5 +67,13 @@ public class CellDoorAnimation : MonoBehaviour
         this.gameObject.GetComponentInChildren<Camera>().gameObject.SetActive(false);
 
         GameManager.Instance.GameStarted = true;
+    }
+
+    public void AnimatorSkip()
+    {
+        DestroyAnimator();
+
+        GameObject.Destroy(this._door);
+        LaunchBox();
     }
 }

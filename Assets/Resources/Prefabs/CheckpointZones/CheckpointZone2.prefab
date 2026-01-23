@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2492622535943090497}
   - component: {fileID: 979354825167263900}
   - component: {fileID: 5852053873576663008}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   - component: {fileID: 5675867220403664453}
   - component: {fileID: 8753900054289679853}
   - component: {fileID: 8413692542846317449}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (4)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -463,7 +463,7 @@ GameObject:
   - component: {fileID: 7914576559689922385}
   - component: {fileID: 7567128011911449833}
   - component: {fileID: 4837547484325860612}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (5)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -595,10 +595,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1088
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2999
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 9121783506080473639}
   - component: {fileID: 256397495334862804}
   - component: {fileID: 1748778683165086023}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyPath
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 5b2a8a1e265e99b4fb8d77061490f397, type: 3}
@@ -698,7 +698,7 @@ GameObject:
   - component: {fileID: 332940098463044896}
   - component: {fileID: 6804438581200432641}
   - component: {fileID: 7078752146117277792}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (3)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -770,7 +770,7 @@ GameObject:
   - component: {fileID: 1730197734821779316}
   - component: {fileID: 1072842802104332548}
   - component: {fileID: 2946444620340214490}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (2)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -914,7 +914,7 @@ GameObject:
   - component: {fileID: 7608522113508797070}
   - component: {fileID: 5085422622471314618}
   - component: {fileID: 3413577422572112107}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (1)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -1004,8 +1004,8 @@ Transform:
   m_GameObject: {fileID: 7955665742530846383}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.6830627, z: -0, w: 0.7303598}
-  m_LocalPosition: {x: -1.438, y: 3.614, z: -17.879}
-  m_LocalScale: {x: 2.2502968, y: 0.17005058, z: 1}
+  m_LocalPosition: {x: -0.9332, y: 3.619, z: -18.5486}
+  m_LocalScale: {x: 4.5602007, y: 0.17005058, z: 2.0969}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2808882642674372222}
@@ -1136,6 +1136,10 @@ PrefabInstance:
       propertyPath: Path
       value: 
       objectReference: {fileID: 7658042501431584809}
+    - target: {fileID: 2020442006336255343, guid: 05b697cdddc3b242b84a93cd688137fe, type: 3}
+      propertyPath: _speed
+      value: 3.25
+      objectReference: {fileID: 0}
     - target: {fileID: 5259425982155170079, guid: 05b697cdddc3b242b84a93cd688137fe, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -1701,8 +1705,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4048658022276745013, guid: 1d371f3bad9a452bf9a2ad8b2eae2c9a, type: 3}
       propertyPath: Desc
-      value: These lift use a strange one way platorm. Things that get crushed come
-        out safely ontop.
+      value: A lift (elevator) is a mechanical platform used to move people or goods
+        vertically between floors in a building
       objectReference: {fileID: 0}
     - target: {fileID: 5698677477509066170, guid: 1d371f3bad9a452bf9a2ad8b2eae2c9a, type: 3}
       propertyPath: m_Name
@@ -1726,7 +1730,11 @@ PrefabInstance:
       objectReference: {fileID: 7571002105435006498}
     - target: {fileID: 7180450359346360815, guid: 1d371f3bad9a452bf9a2ad8b2eae2c9a, type: 3}
       propertyPath: _timeToTravel
-      value: 5
+      value: 2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7180450359346360815, guid: 1d371f3bad9a452bf9a2ad8b2eae2c9a, type: 3}
+      propertyPath: _stickToTarget
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1764,7 +1772,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3896180563896291806, guid: 997212b49db0e785c80656fa67791af6, type: 3}
       propertyPath: m_VersionIndex
-      value: 10447
+      value: 10528
       objectReference: {fileID: 0}
     - target: {fileID: 4581336719240606374, guid: 997212b49db0e785c80656fa67791af6, type: 3}
       propertyPath: m_LocalPosition.x

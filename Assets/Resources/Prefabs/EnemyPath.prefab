@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2616407361514685603}
   - component: {fileID: 94646186359258742}
   - component: {fileID: 2566263666724307513}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (3)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -48,6 +48,7 @@ MonoBehaviour:
   Node:
     Id: 0
     WaitTime: 0
+    RotationSpeed: 0
     Position: {x: 0, y: 0, z: 0}
     Index: 3
 --- !u!65 &2566263666724307513
@@ -82,7 +83,7 @@ GameObject:
   - component: {fileID: 6430854653891182585}
   - component: {fileID: 996482088365955741}
   - component: {fileID: 2911112611812662717}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (2)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -119,6 +120,7 @@ MonoBehaviour:
   Node:
     Id: 0
     WaitTime: 2
+    RotationSpeed: 0
     Position: {x: 0, y: 0, z: 0}
     Index: 2
 --- !u!65 &2911112611812662717
@@ -153,7 +155,7 @@ GameObject:
   - component: {fileID: 6736860646792561548}
   - component: {fileID: 3979410199831741624}
   - component: {fileID: 8762572217220324721}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: EnemyPath
   m_TagString: Untagged
   m_Icon: {fileID: 2800000, guid: 5b2a8a1e265e99b4fb8d77061490f397, type: 3}
@@ -217,7 +219,7 @@ GameObject:
   - component: {fileID: 8633283879641244663}
   - component: {fileID: 1000395162014827002}
   - component: {fileID: 8143259438496771676}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -254,6 +256,7 @@ MonoBehaviour:
   Node:
     Id: 0
     WaitTime: 0
+    RotationSpeed: 0
     Position: {x: 0, y: 0, z: 0}
     Index: 0
 --- !u!65 &8143259438496771676
@@ -288,7 +291,7 @@ GameObject:
   - component: {fileID: 5517816330822201335}
   - component: {fileID: 3411704078224561388}
   - component: {fileID: 2904906911599927707}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (1)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -325,6 +328,7 @@ MonoBehaviour:
   Node:
     Id: 0
     WaitTime: 0
+    RotationSpeed: 0
     Position: {x: 0, y: 0, z: 0}
     Index: 1
 --- !u!65 &2904906911599927707
@@ -359,7 +363,7 @@ GameObject:
   - component: {fileID: 3786638648138142379}
   - component: {fileID: 2488754528671367647}
   - component: {fileID: 2088180777397154596}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: PathNode (4)
   m_TagString: EnemyPathNode
   m_Icon: {fileID: 0}
@@ -396,6 +400,7 @@ MonoBehaviour:
   Node:
     Id: 0
     WaitTime: 0
+    RotationSpeed: 0
     Position: {x: 0, y: 0, z: 0}
     Index: 4
 --- !u!65 &2088180777397154596

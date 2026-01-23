@@ -154,7 +154,7 @@ MonoBehaviour:
   _goToPosition: {fileID: 0}
   _timeToTravel: 5
   _currentTarget: {x: 0, y: 0, z: 0}
-  _stickToTarget: 0
+  _needReactivationByObject: 1
 --- !u!65 &702983330187300995
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,7 +174,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 3, z: 1}
+  m_Size: {x: 0.9, y: 3, z: 0.9}
   m_Center: {x: 0, y: 2, z: 0}
 --- !u!114 &4048658022276745013
 MonoBehaviour:
@@ -194,8 +194,8 @@ MonoBehaviour:
   PasueTime: I will change on my own
   RewindTime: I will change on my own
   _outlineColour: {r: 1, g: 0.8835707, b: 0, a: 1}
-  RecordTimeSeconds: 10
-  PauseTimeSeconds: 5
-  PauseCooldown: 5
+  RecordTimeSeconds: 0
+  PauseTimeSeconds: 0
+  PauseCooldown: 0
   IsRewinding: 0
   IsPasued: 0

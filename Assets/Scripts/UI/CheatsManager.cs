@@ -4,6 +4,7 @@ using UnityEngine.EventSystems;
 using TMPro;
 using System;
 using JetBrains.Annotations;
+using UnityEngine.SceneManagement;
 
 public class CheatsManager : MonoBehaviour
 {
@@ -60,6 +61,7 @@ public class CheatsManager : MonoBehaviour
 
             switch(command)
             {
+                case "d":
                 case "damage":
 
                     if(args.Length == 0)
@@ -77,13 +79,22 @@ public class CheatsManager : MonoBehaviour
 
                     break;
 
+                case "k":
                 case "kill":
+                    
+                    if(this._player.GetComponent<PlayerHealth>().CurrentCheckPoint.Index == 1) 
+                    {
+                        this._errorText.text = "can't use command 'kill' when your checkpoint is 1. Use command 'Checkpoint to change it'";
+                        break;
+                    }
+
 
                     this._player.GetComponent<PlayerHealth>().Damage(int.MaxValue);
                     this._errorText.text = "Command 'kill' executed";
                     
                     break;
 
+                case "c":
                 case "checkpoint":
 
                     if(args.Length == 0)
@@ -150,11 +161,32 @@ public class CheatsManager : MonoBehaviour
 
                     break;
 
+                case "i":
                 case "deathless":
 
                     this._player.GetComponent<PlayerHealth>().Invincable = !this._player.GetComponent<PlayerHealth>().Invincable;
 
-                    this._errorText.text = (this._player.GetComponent<PlayerHealth>().Invincable) ? "Command 'deathless' executed now invincable" : "Command 'deathless' executed now vunerable";
+                    this._errorText.text = (this._player.GetComponent<PlayerHealth>().Invincable) ? "Command 'deathless' executed now invincible" : "Command 'deathless' executed now vunerable";
+
+                    break;
+
+                case "n":
+                case "noclip":
+
+                    GameObject camObj = GameObject.FindGameObjectWithTag("ControlCamera");
+
+                    if (!camObj)
+                    {
+                        this._errorText.text = "You must be in control mode to use 'noclip'";
+                        return;
+                    }
+
+                    ControlCamera camera = camObj.GetComponent<ControlCamera>();
+
+
+                    camera.ActivateNoClip();
+
+                    this._errorText.text = (camera.IsNoclip) ? "Command 'noclip' executed now noclip" : "Command 'noclip' executed now clip";
 
                     break;
             }

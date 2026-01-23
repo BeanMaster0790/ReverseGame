@@ -59,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 5223828302281628919}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.809445, y: 10.047, z: -22.435196}
+  m_LocalPosition: {x: 12.809445, y: 7.862, z: -22.435196}
   m_LocalScale: {x: 5, y: 0.25, z: 5}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _boxRigidBody: {fileID: 1372909845459295482}
   _launchVector: {x: 0, y: 9, z: 15}
+  _door: {fileID: 8837294956816337923}
 --- !u!95 &7017364036943383748
 Animator:
   serializedVersion: 7
@@ -2968,7 +2969,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 10345
+  m_VersionIndex: 10411
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
@@ -3151,6 +3152,10 @@ PrefabInstance:
       propertyPath: _goToPosition
       value: 
       objectReference: {fileID: 6612179307886767541}
+    - target: {fileID: 7180450359346360815, guid: 1d371f3bad9a452bf9a2ad8b2eae2c9a, type: 3}
+      propertyPath: _stickToTarget
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3187,7 +3192,7 @@ PrefabInstance:
       objectReference: {fileID: 13400000, guid: 16edd28ba09ce930588c2705aa50cd0c, type: 2}
     - target: {fileID: 3896180563896291806, guid: 997212b49db0e785c80656fa67791af6, type: 3}
       propertyPath: m_VersionIndex
-      value: 5727
+      value: 5793
       objectReference: {fileID: 0}
     - target: {fileID: 4581336719240606374, guid: 997212b49db0e785c80656fa67791af6, type: 3}
       propertyPath: m_LocalPosition.x

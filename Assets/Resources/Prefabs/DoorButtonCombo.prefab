@@ -71,10 +71,10 @@ Rigidbody:
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 1088
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2999
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -442,6 +442,8 @@ MonoBehaviour:
   _openPositionTransform: {fileID: 6742272061064988435}
   _timeToOpen: 5
   LockOpen: 0
+  DoorOpen: 0
+  _playSound: 1
 --- !u!1 &8496888830754288642
 GameObject:
   m_ObjectHideFlags: 0
